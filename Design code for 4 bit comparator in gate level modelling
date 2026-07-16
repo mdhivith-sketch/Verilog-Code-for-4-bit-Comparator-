@@ -1,0 +1,40 @@
+//Design code 
+module comparator_4bit(a, b, gt, lt, eq);
+input [3:0] a, b;
+output gt, lt, eq;
+
+wire w1,w2,w3,w4;
+wire w5,w6,w7,w8;
+wire w9,w10,w11,w12;
+wire w13,w14,w15,w16;
+wire w17,w18,w19,w20,w21,w22;
+not g1(w1,a[3]);
+not g2(w2,a[2]);
+not g3(w3,a[1]);
+not g4(w4,a[0]);
+not g5(w5,b[3]);
+not g6(w6,b[2]);
+not g7(w7,b[1]);
+not g8(w8,b[0]);
+xnor g9(w9,a[3],b[3]);
+xnor g10(w10,a[2],b[2]);
+xnor g11(w11,a[1],b[1]);
+xnor g12(w12,a[0],b[0]);
+
+// greater than
+and g13(w13,a[3],w5);
+and g14(w17,w9,a[2],w6);
+and g15(w18,w9,w10,a[1],w7);
+and g16(w19,w9,w10,w11,a[0],w8);
+or g17(gt,w13,w17,w18,w19);
+
+// less than 
+and g18(w14,w1,b[3]);
+and g19(w20,w9,w2,b[2]);
+and g20(w21,w9,w10,w3,b[1]);
+and g21(w22,w9,w10,w11,w4,b[0]);
+or g22(lt,w14,w20,w21,w22);
+
+// equal to 
+and g23(eq,w9,w10,w11,w12);
+endmodule
